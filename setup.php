@@ -20,14 +20,14 @@
             restorant_type VARCHAR(15) NOT NULL,
             cit VARCHAR(20) NOT NULL,
             city VARCHAR(20) NOT NULL,
-            ditrict VARCHAR(25) NOT NULL),
-            neighborhood VARCHAR(25) NOT NULL),
-            address VARCHAR(25) NOT NULL),
-            owner_firstname VARCHAR(25) NOT NULL),
-            owner_lastname VARCHAR(25) NOT NULL),
-            owner_phone VARCHAR(13) NOT NULL),
-            personel_firstname VARCHAR(25) NOT NULL),
-            personel_lastname VARCHAR(25) NOT NULL),
+            ditrict VARCHAR(25) NOT NULL,
+            neighborhood VARCHAR(25) NOT NULL,
+            current_address VARCHAR(25) NOT NULL,
+            owner_firstname VARCHAR(25) NOT NULL,
+            owner_lastname VARCHAR(25) NOT NULL,
+            owner_phone VARCHAR(13) NOT NULL,
+            personel_firstname VARCHAR(25) NOT NULL,
+            personel_lastname VARCHAR(25) NOT NULL,
             personel_phone VARCHAR(13) NOT NULL)";
         if($conn -> query($sql) === TRUE){echo "[+] Restorants' table has been created";}
         else{echo "[-] Error when creating table " . $conn->error;}
@@ -44,13 +44,13 @@
         else{echo "[-] Error when creating table " . $conn->error;}
     }
     function orderDetail($conn){
-        $sql = "CREATE TABLE restorant_menu (id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        $sql = "CREATE TABLE orders (id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             order_date DATETIME NOT NULL,
             total_cost INT(5) NOT NULL,
             food_cost VARCHAR(5) NOT NULL,
-            user_id INT(5) NOT NULL,
+            person_id INT(5) NOT NULL,
             restorant_menuid INT(4) NOT NULL)";
-        if($conn -> query($sql) === TRUE){echo "[+] Menu table has been created";}
+        if($conn -> query($sql) === TRUE){echo "[+] Order table has been created";}
         else{echo "[-] Error when creating table " . $conn->error;}
     }
 createUser($conn);
