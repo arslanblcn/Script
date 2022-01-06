@@ -4,6 +4,11 @@
         $db_password = "password";
         $db_name = "yemeksepeti";
 
-        $conn = new mysqli($server, $db_user, $db_password, $db_name);
-        if($conn -> connect_error){die("Connection Failed" . mysqli_connect_error());}
+        $dsn = "mysql:host=$server;dbname=$db_name;charset=UTF8";
+        try {
+                $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+                $conn = new PDO($dsn, $db_user, $db_password, $options);
+        } catch (PDOException $e) {
+                echo $e->getMessage();
+        }
 ?>

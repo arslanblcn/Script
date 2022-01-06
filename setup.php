@@ -8,7 +8,7 @@
             firstname VARCHAR(30) NOT NULL,
             lastname VARCHAR(30) NOT NULL,
             city VARCHAR(20) NOT NULL,
-            ditrict VARCHAR(25) NOT NULL)";
+            district VARCHAR(25) NOT NULL)";
         if($conn -> query($sql) === TRUE){echo "[+] Users' table has been created";}
         else{echo "[-] Error when creating table " . $conn->error;}
     }
