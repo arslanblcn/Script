@@ -30,10 +30,8 @@
                 $query->execute(array(':username' => $username, ':password' => $passwd));
                 if($query->rowCount() > 0) {
                     $row = $query->fetch();
-                    echo $row['username'];
-                    echo $row['password'];
                     $_SESSION['username'] = $row['username'];
-                    header("Refresh:3;url=home.php");
+                    header("Refresh:1;url=home.php");
                 } else {
                     echo '<script>Swal.fire("Hata", "Kullanıcı adı yada parola yanlış!", "error"); </script>';
                 }
