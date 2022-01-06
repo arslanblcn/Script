@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,6 +12,38 @@
     <title>Login Page</title>
   </head>
   <body>
+
+  <?php 
+    require_once "config.php";
+    if(isset($_POST['submit'])){
+        $username = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
+        if(empty($username) || empty($password))  
+        {  
+            echo '<script>Swal.fire("Hata", "Bütün alanların doldurulması gerekli", "error"); </script>';
+        } else {
+            try{
+                $passwd = md5($password);
+                 // veritabanında kullanıcı bilgilerini çek ve kontrol et
+                $query = "SELECT * FROM users WHERE username=:username and password=:password";
+                $query = $conn->prepare($query);
+                $query->execute(array(':username' => $username, ':password' => $passwd));
+                if($query->rowCount() > 0) {
+                    $row = $query->fetch();
+                    echo $row['username'];
+                    echo $row['password'];
+                    $_SESSION['username'] = $row['username'];
+                    header("Refresh:3;url=home.php");
+                } else {
+                    echo '<script>Swal.fire("Hata", "Kullanıcı adı yada parola yanlış!", "error"); </script>';
+                }
+                
+            } catch (PDOException $e) {
+                echo "Error : ".$e->getMessage();
+            }
+        }
+    }
+  ?>
   <section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
