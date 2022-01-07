@@ -43,25 +43,28 @@
             // Eğer parolada sıkıntı yoksa veritabanına kaydet
             // username kısmı mail adresi
             else {
-            $data = [
-                'restorant_name' => $restorant_name,
-                'email' => $email,
-                'password' => md5($password),
-                'phone_number' => $phone_number,
-                'restorant_type' => $restorant_type,
-                'city' => $city,
-                'district' => $ilce,
-                'current_address' => $current_address,
-                'owner_firstname' => $owner_firstname,
-                'owner_lastname' => $owner_lastname,
-                'owner_phone' => $owner_phone,
-            ];
-            $query = "INSERT INTO users (username, password, firstname, lastname, city, district) VALUES (:username, :password, :firstname, :lastname, :city, :district)";
-            $stmt = $conn->prepare($query);
-            $stmt->execute($data);
-            if($stmt){
-                echo '<script>Swal.fire("Başarılı", "Kaydınız Başarı ile Gerçekleşmiştir", "success"); </script>';
-            }
+                $data = [
+                    'restorant_name' => $restorant_name,
+                    'email' => $email,
+                    'password' => md5($password),
+                    'phone_number' => $phone_number,
+                    'restorant_type' => $restorant_type,
+                    'city' => $city,
+                    'district' => $district,
+                    'current_address' => $current_address,
+                    'owner_firstname' => $owner_firstname,
+                    'owner_lastname' => $owner_lastname,
+                    'owner_phone' => $owner_phone,
+                ];
+                $query = "INSERT INTO restorants (restorant_name, email, password, phone_number, restorant_type, 
+                city, district, current_address, owner_firstname, owner_lastname, owner_phone) 
+                VALUES (:restorant_name, :email, :password, :phone_number, :restorant_type, 
+                :city, :district, :current_address, :owner_firstname, :owner_lastname, :owner_phone)";
+                $stmt = $conn->prepare($query);
+                $stmt->execute($data);
+                if($stmt){
+                    echo '<script>Swal.fire("Başarılı", "Kaydınız Başarı ile Gerçekleşmiştir", "success"); </script>';
+                }
             }
         }
     }
@@ -119,7 +122,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <input type="email" name="adres" id="adres" class="form-control form-control-lg" >
+                        <input type="text" name="adres" id="adres" class="form-control form-control-lg" >
                         <label class="form-label select-label" for="adres">Açık Adres</label>
                     </div>
                 </div>
@@ -133,7 +136,7 @@
                     </div>
                         <div class="col-md-4 mb-4 pb-2">
                         <div class="form-outline">
-                            <input type="password" name="soyad" id="soyad" class="form-control form-control-lg" />
+                            <input type="text" name="soyad" id="soyad" class="form-control form-control-lg" />
                             <label class="form-label" for="soyad">Soyadı</label>
                         </div>
                     </div>
