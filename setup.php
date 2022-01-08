@@ -37,7 +37,7 @@
             food_category VARCHAR(20) NOT NULL,
             food_options VARCHAR(20) NOT NULL,
             extra_food_name VARCHAR(255),
-            extra_food_food_cost VARCHAR(20),
+            extra_food_cost VARCHAR(20),
             restorant_id INT(4) NOT NULL)";
         if($conn -> query($sql) === TRUE){echo "[+] Menu table has been created";}
         else{echo "[-] Error when creating table " . $conn->error;}
@@ -57,3 +57,4 @@ createRestorant($conn);
 createMenu($conn);
 orderDetail($conn);
 ?>
+

@@ -31,6 +31,7 @@
                 if($query->rowCount() > 0) {
                     $row = $query->fetch();
                     $_SESSION['email'] = $row['email'];
+                    $_SESSION['id'] = $row['id'];
                     header("Refresh:1;url=home.php");
                 } else {
                     echo '<script>Swal.fire("Hata", "Kullanıcı adı yada parola yanlış!", "error"); </script>';

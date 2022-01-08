@@ -59,7 +59,7 @@ if (isset($_SESSION['email'])) { ?>
         </nav>
 
 
-    <?php 
+        <?php
         $kategori_arr = array(
             "Gözleme" => "Gözleme",
             "Kepablar & Izgaralar" => "Kepablar & Izgaralar",
@@ -70,7 +70,60 @@ if (isset($_SESSION['email'])) { ?>
             "Sulu Yemekler" => "Sulu Yemekler",
             "Fırın Ürünleri" => "Fırın Ürünleri",
         );
-    ?>
+
+        if (isset($_POST['submit'])) {
+            $food_name = htmlspecialchars(trim($_POST['yemek_adi']));
+            $img = $_FILES["yemek_gorsel"]["name"];
+            $type = $_FILES["yemek_gorsel"]["type"];
+            $size = $_FILES["yemek_gorsel"]["size"];
+            $temp = $_FILES["yemek_gorsel"]["tmp_name"];
+            $path = "uploads/" . $img;
+            $allowed_types = array("image/jpeg", "image/png", "image/jpg");
+            $food_category = htmlspecialchars(trim($_POST['yemek_kategori']));
+            $food_option = implode(", ",  $_POST['yemekBoyutu']);
+            $food_cost = htmlspecialchars(trim($_POST['yemek_tutar']));
+            $restorant_id = $_SESSION['id'];
+            if (!empty($_POST['ekstra_yemek_adi']) && !empty($_POST['ekstra_yemek_fiyati'])) {
+                $extra_food_name = htmlspecialchars(trim($_POST['ekstra_yemek_adi']));
+                $extra_food_cost = htmlspecialchars(trim($_POST['ekstra_yemek_adi']));
+            } else {
+                $extra_food_name = null;
+                $extra_food_cost = null;
+            }
+            try {
+                //--------------Ekleme işlemleri-------------
+                // İzin verilen dosya tipleri ve boyutu 5mb dan düşük ise klasöre taşı ve ekleme yap
+                if (!in_array($type, $allowed_types)) {
+                    echo '<script>Swal.fire("Hata", "Yanlış dosya formatı. JPEG, PNG kullanılabilir.", "error"); </script>';
+                } else {
+                    if (!file_exists($path)) {
+                        if ($size < 5000000) {
+                            move_uploaded_file($temp, $path);
+                            $stmt = $conn->prepare("INSERT INTO restorant_menu (food, food_img, food_cost, food_category, food_options, 
+                            extra_food_name, extra_food_cost, restorant_id) VALUES (:food, :food_img, :food_cost, :food_category, :food_options, 
+                            :extra_food_name, :extra_food_cost, :restorant_id)");
+                            $stmt->bindParam(':food', $food_name, PDO::PARAM_STR);
+                            $stmt->bindParam(':food_img', $img);
+                            $stmt->bindParam(':food_cost', $food_cost, PDO::PARAM_STR);
+                            $stmt->bindParam(':food_category', $food_category, PDO::PARAM_STR);
+                            $stmt->bindParam(':food_options', $food_option, PDO::PARAM_STR);
+                            $stmt->bindParam(':extra_food_name', $extra_food_name, PDO::PARAM_STR);
+                            $stmt->bindParam(':extra_food_cost', $extra_food_cost, PDO::PARAM_STR);
+                            $stmt->bindParam(':restorant_id', $restorant_id, PDO::PARAM_INT);
+                            if($stmt->execute()){
+                                echo '<script>Swal.fire("Başarılı", "Yemek Başarılı bir şekilde eklendi.", "success"); </script>';
+                            }
+                            
+                        } else {
+                            echo '<script>Swal.fire("Hata", "Dosya boyutu 5MB\'dan düşük olmalıdır.", "error"); </script>';
+                        }
+                    }
+                }
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+        ?>
         <section class="vh-100 gradient-custom">
             <div class="container py-5 h-100">
                 <div class="row justify-content-center h-100">
@@ -85,7 +138,7 @@ if (isset($_SESSION['email'])) { ?>
                                         <button class="btn btn-primary" onclick="formGoster()"><i class="bi bi-bag-plus-fill"> Ekstra Ürün Ekle</i></button>
                                     </div>
                                 </div>
-                                <form method="POST" action="<?= $_SERVER['PHP_SELF']; ?>">
+                                <form method="POST" action="<?= $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
@@ -105,10 +158,10 @@ if (isset($_SESSION['email'])) { ?>
                                             <div class="form-outline">
                                                 <select class="form-select" name="yemek_kategori" id="yemek_kategori">
                                                     <option value="">Seçiniz</option>
-                                                    <?php 
-                                                        foreach($kategori_arr as $kategori){
-                                                            echo "<option value=\"$kategori\">$kategori</option>";
-                                                        }
+                                                    <?php
+                                                    foreach ($kategori_arr as $kategori) {
+                                                        echo "<option value=\"$kategori\">$kategori</option>";
+                                                    }
                                                     ?>
                                                 </select>
                                                 <label class="form-label" for="yemek_kategori">Yemek Kategorisi</label>
