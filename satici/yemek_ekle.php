@@ -85,7 +85,7 @@ if (isset($_SESSION['email'])) { ?>
             $restorant_id = $_SESSION['id'];
             if (!empty($_POST['ekstra_yemek_adi']) && !empty($_POST['ekstra_yemek_fiyati'])) {
                 $extra_food_name = htmlspecialchars(trim($_POST['ekstra_yemek_adi']));
-                $extra_food_cost = htmlspecialchars(trim($_POST['ekstra_yemek_adi']));
+                $extra_food_cost = htmlspecialchars(trim($_POST['ekstra_yemek_fiyati']));
             } else {
                 $extra_food_name = null;
                 $extra_food_cost = null;
