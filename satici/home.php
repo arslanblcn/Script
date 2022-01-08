@@ -2,7 +2,7 @@
     session_start();
     require_once "../config.php";
     if(isset($_SESSION['email'])){?>
-    <!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -22,17 +22,23 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#">Hidden brand</a>
+        <a class="navbar-brand" href="#">Pidesepeti</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="home.php">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
+          <div class="dropdown mx-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="yemekDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+              İşlemler
+            </button>
+          <ul class="dropdown-menu" aria-labelledby="yemekDropDown">
+            <li><a class="dropdown-item" href="yemek_ekle.php">Yemek Ekle</a></li>
+            <li><a class="dropdown-item" href="yemek_listele.php">Yemek Listele</a></li>
+          </ul>
+        </div>
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
