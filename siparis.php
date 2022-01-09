@@ -27,7 +27,7 @@ if (isset($_SESSION['username'])) { ?>
           <a class="navbar-brand" href="#">Hidden brand</a>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="home.php">Home</a>
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
           </ul>
           <form class="d-flex">
@@ -45,48 +45,33 @@ if (isset($_SESSION['username'])) { ?>
         </div>
       </div>
     </nav>
-    <?php
-    $query = $conn->prepare("SELECT * FROM restorants");
-    $query->execute();
-    ?>
     <div class="container py-5 h-100">
       <div class="row justify-content-center h-100">
         <div class="col-8">
           <div class="card shadow-2-strong" style="border-radius: 15px;">
             <div class="card-body p-4 p-md-5">
-              <h3 class="">Yemek Listele</h3>
-              <?php
-              if ($query->rowCount() > 0) {
-                $rows = $query->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($rows as $row) {
-              ?>
-                  <form method="POST" action="siparis.php">
-                    <div class="card">
-                      <div class="card-header">
-                        <?php echo $row['restorant_name']; ?>
-                      </div>
-                      <div class="card-body">
-                        <h5 class="card-title"><?php echo $row['current_address']; ?></h5>
-                        <p class="card-text"><?php echo $row['city'] . "->" . $row['district']; ?></p>
-                        <button type="submit" name="submit" class="btn btn-secondary"><i class="bi bi-shop-window"></i></button>
-                      </div>
-                    </div>
-                  </form>
-              <?php
-                }
-              }
-              ?>
+              <h3 class="">Sipariş Ver</h3>
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+                </li>
+              </ul>
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script>
-      $('#submit').click(function(){
-        var id = $("hidden").val();
-        $("#modal_body").html(text);
-      });
-    </script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
