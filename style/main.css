@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+
+:root {
+  --main-color: #fa0050;
+  --yellow: #f6a31c;
+  --green: #29cc81;
+  --grey: #eff0f2;
+}
+
+* {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 11px;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 3em;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.badge {
+  background-color: var(--green) !important;
+}
+
+.btn-success {
+  background-color: var(--green) !important;
+  border: none !important;
+}
+
+.header {
+  background: var(--main-color);
+}
+
+.logo {
+  width: 159px;
+  height: auto;
+}
+
+.fa-shopping-basket,
+.fa-home {
+  font-size: 44px;
+  color: var(--grey);
+}
+
+.fa-home {
+  font-size: 24px;
+}
+
+.fa-map-marker-alt,
+.fa-calendar {
+  font-size: 16px;
+}
+
+.card--pink {
+  border: 5px solid var(--main-color) !important;
+}
+
+.card--yellow {
+  border: 5px solid var(--yellow) !important;
+}
+
+.card--green {
+  border: 5px solid var(--green) !important;
+}
+
+.card--grey {
+  border: 5px solid var(--grey) !important;
+}
+
+.card__header {
+  background-color: var(--main-color) !important;
+}
+
+.card-header:first-child {
+  border-radius: 0 !important;
+}
+
+.card__header--yellow {
+  background-color: var(--yellow) !important;
+}
+
+.card__header--green {
+  background-color: var(--green) !important;
+}
+
+.card__header--grey {
+  background-color: var(--grey) !important;
+  color: var(--main-color) !important;
+}
+
+.card-footer {
+  margin: 0;
+}
+
+.card__footer--grey {
+  background-color: var(--grey) !important;
+}
+
+.card__footer--grey a {
+  color: var(--main-color);
+}
+
+.adv-image {
+  border-radius: 7px;
+}
+
+.list__item {
+  list-style: circle !important;
+}
+
+.list__title {
+  color: var(--yellow);
+}
+
+.footer {
+  background-color: var(--grey);
+}
+
+.color-main {
+  color: var(--main-color);
+}
+
+.links a {
+  text-decoration: none;
+  color: var(--yellow);
+}
+
+.auth-page--card {
+  height: 230px;
+}
+
+.accordion-button {
+  background-color: var(--grey) !important;
+}
+
+.user-avatar {
+  border: 1px solid #d5d5d5;
+}
+
+.fa-user {
+  font-size: 24px;
+  color: #d5d5d5;
+}
+
+.accordion-body ul,
+li {
+  padding: 0;
+}
+
+.accordion-body a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 700;
+}
+
+.cikis-yap-link {
+  color: var(--main-color) !important;
+}
+
+.badge--restorant {
+  width: 46px;
+}
+
+.restorant__info-card {
+  background-image: url('../asset/komagene-header.jpeg');
+  background-size: cover;
+  background-position: center;
+
+  padding: 24px 32px;
+}
+
+.nav-tabs .nav-link {
+  color: #000;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--main-color) !important;
+}
+
+.nav-tabs .nav-link:hover {
+  color: var(--main-color) !important;
+}
