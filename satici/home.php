@@ -94,7 +94,7 @@ if (isset($_SESSION['username'])) {
                   foreach($f_name as $f){
                   ?>
                     <div class="d-flex ">
-                      <h6 class="color-main mx-1"><?php echo $f . "\t" . $f_number[$i]; ?></h6>
+                      <h6 class="color-main mx-1"><?php echo $f . " - " . $f_number[$i] . " Adet"; ?></h6>
                     </div>
                     <?php
                     $i++;

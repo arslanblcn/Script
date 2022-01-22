@@ -37,7 +37,12 @@ li {
 .badge {
   background-color: var(--green) !important;
 }
-
+.badge{
+  background-color: var(--green) !important;
+}
+.badge-warning{
+  background-color: var(--yellow) !important;
+}
 .btn-success {
   background-color: var(--green) !important;
   border: none !important;

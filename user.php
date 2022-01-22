@@ -54,16 +54,6 @@
             </div>
           </div>
         </div>
-
-        <div class="card mt-3">
-          <div class="card-header card__header text-white">
-            Yemek Sepetim
-          </div>
-          <div class="card-body d-flex align-items-center">
-            <i class="fas fa-shopping-basket"></i>
-            <p class="card-text mx-3">Sepetiniz henüz boş.</p>
-          </div>
-        </div>
       </div>
       <div class="col-md-8">
         <div class="row">
@@ -97,29 +87,23 @@
                   <span class="mx-3"><b>Son Siparişlerim</b></span>
                 </div>
 
-                <div class="d-flex align-items-center mb-2">
-                  <span class="badge p-2">8.7</span>
-                  <span class="mx-2">Gupse Fırın & Cafe, Çankaya (Emek Mah.) - 19 gün
-                    önce</span>
-                </div>
-
-                <div class="d-flex align-items-center mb-2">
-                  <span class="badge p-2">9.3</span>
-                  <span class="mx-2">Kafes Fırın, Çankaya (Anıttepe Mah.) - 29 gün
-                    önce</span>
-                </div>
-
-                <div class="d-flex align-items-center mb-2">
-                  <span class="badge p-2">8.4</span>
-                  <span class="mx-2">Komagene Etsiz Çiğ Köfte, Çankaya (Emek Mah.) - 30 gün
-                    önce</span>
-                </div>
-
-                <div class="d-flex align-items-center">
-                  <span class="badge p-2">8.9</span>
-                  <span class="mx-2">Bahçeli Tost Evi, Çankaya (Bahçelievler Mah.) - 1 ay
-                    önce</span>
-                </div>
+              <?php 
+              $last_orders = $conn->prepare("SELECT * FROM orders WHERE person_id=:person_id ORDER BY order_date LIMIT 6");
+              $last_orders->bindParam(":person_id", $_SESSION['id']);
+              $last_orders->execute();
+              if($last_orders->rowCount() > 0){
+                while($user_orders = $last_orders->fetch(PDO::FETCH_ASSOC)){ 
+                  extract($user_orders);?>
+                    <div class="d-flex justify-content-between mb-2">
+                    <span class="badge badge-success p-2">8.7</span>
+                    <span class="text-monospace mx-2"><?php echo "<a href='restorant.php?restorant=$restorant_name' class='text-decoration-none link-dark'>" . $restorant_name . "</a>" . " , " . date("d-m-Y",strtotime($order_date)); ?></span>
+                    <?php if($stat === "Teslim Edildi"){?><span class="badge p-2"><?php echo $stat; ?></span><?php } ?>
+                    <?php if($stat === "Sipariş Alındı"){?><span class="badge badge-warning p-2"><?php echo $stat; ?></span><?php } ?>
+                  </div>
+                  <?php
+                }
+              }
+              ?>
               </div>
 
               <h6 class="card-footer card__footer--grey">
