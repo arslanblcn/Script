@@ -178,7 +178,7 @@ li {
 }
 
 .restorant__info-card {
-  background-image: url('../asset/komagene-header.jpeg');
+  background-image: url('../asset/komagene-header.jpg');
   background-size: cover;
   background-position: center;
 
@@ -195,4 +195,12 @@ li {
 
 .nav-tabs .nav-link:hover {
   color: var(--main-color) !important;
+}
+input[type="number"] {
+	outline: none;
+	-moz-appearance: textfield;
+  border-radius: 0.6rem;
+  border-color: ghostwhite;
+  width: 4rem;
+  margin-left: 0.5rem;
 }

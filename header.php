@@ -11,13 +11,18 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Yemeksepeti | Home Page</title>
 </head>
-
+<style>
+    .grid-list {
+        display: grid;
+        grid-template-columns: repeat(2, 0.20fr);
+    }
+</style>
 <body>
   <header class="header">
     <div class="container">
       <div class="row py-3 align-items-md-center">
         <div class="col-md-3">
-          <img src="./asset/logo.png" alt="logo" class="logo" />
+          <a href="user.php"><img src="./asset/logo.png" alt="logo" class="logo" /></a>
         </div>
 
         <div class="col-md-9 d-flex">

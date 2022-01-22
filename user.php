@@ -1,5 +1,6 @@
 <?php
   session_start();
+  require_once "config.php";
   include "header.php"; 
   if (isset($_SESSION['username'])) { 
 ?>
@@ -215,39 +216,28 @@
               </div>
             </div>
 
+
+            <?php 
+              // Restorant Listesinden en 5 kaydı çeker
+              $getLast = $conn->prepare("Select restorant_name, city, district FROM restorants ORDER BY id LIMIT 5");
+              $getLast->execute();
+            ?>
             <div class="card card--yellow mt-3">
               <h6 class="card-header card__header--yellow text-white text-center">
                 Yeni Eklenen Restoranlar
               </h6>
               <div class="card-body">
                 <ul class="list">
-                  <li class="list__item">
-                    <p>
-                      Meşhur Adıyaman Çiğ Köftecisi Bayram Usta, Keçiören
-                      (Esertepe Mah.)
-                    </p>
-                  </li>
-                  <li class="list__item">
-                    <p>
-                      Kokomet Köfte & Kokoreç & Tavuk, Etimesgut (Altay Mah.
-                      - Eryaman)
-                    </p>
-                  </li>
-                  <li class="list__item">
-                    <p>
-                      Ziyafet Çiğ Köfte, Pursaklar (Saray Cumhuriyet Mah.)
-                      Borsa Ocakbaşı
-                    </p>
-                  </li>
-                  <li class="list__item">
-                    <p>
-                      Yenimahalle (Batıkent Kardelen Mah.) Feriştah El
-                      Yapımı Gerçek Çiğ
-                    </p>
-                  </li>
-                  <li class="list__item">
-                    <p>Köfte, Altındağ (Aydınlıkevler Mah.)</p>
-                  </li>
+                  <?php 
+                    if($getLast->rowCount() > 0){
+                      while($restorants = $getLast->fetch(PDO::FETCH_ASSOC)){ extract($restorants); ?>
+                      <li class="list__item">
+                        <a href="restorant.php?restorant=<?php echo $restorant_name ?>" class="link-danger text-decoration-none"><?php echo $restorant_name . ",  " . $city . "(" . $district . ")"; ?></a>
+                      </li>
+                  <?php
+                      }
+                    }
+                  ?>
                 </ul>
               </div>
             </div>

@@ -10,14 +10,19 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
+<style>
+    .grid-list {
+        display: grid;
+        grid-template-columns: repeat(2, 0.20fr);
+    }
+</style>
 </head>
-
 <body>
     <header class="header">
         <div class="container">
             <div class="row py-3 align-items-md-center">
                 <div class="col-md-3">
-                    <img src="../asset/logo.png" alt="logo" class="logo" />
+                    <a href="home.php"> <img src="../asset/logo.png" alt="logo" class="logo" /> </a>
                 </div>
 
                 <div class="col-md-9 d-flex">

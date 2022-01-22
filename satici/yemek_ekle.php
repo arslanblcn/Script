@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "../config.php";
-if (isset($_SESSION['email'])) { ?>
+if (isset($_SESSION['username'])) { ?>
     <!doctype html>
     <html lang="en">
 

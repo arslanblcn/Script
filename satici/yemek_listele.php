@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "../config.php";
-if (isset($_SESSION['email'])) { ?>
+if (isset($_SESSION['username'])) { ?>
     <!doctype html>
     <html lang="en">
 
@@ -48,7 +48,7 @@ if (isset($_SESSION['email'])) { ?>
                     </form>
                     <div class="dropdown mx-3">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <?php echo $_SESSION['email']; ?>
+                            <?php echo $_SESSION['username']; ?>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
@@ -70,7 +70,7 @@ if (isset($_SESSION['email'])) { ?>
             $food_category = htmlspecialchars(trim($_POST['yemek_kategori']));
             $food_option = implode(", ",  $_POST['yemekBoyutu']);
             $food_cost = htmlspecialchars(trim($_POST['yemek_tutar']));
-            $restorant_id = $_SESSION['id'];
+            $restorant_id = $_SESSION['restorant_id'];
             if (!empty($_POST['ekstra_yemek_adi']) && !empty($_POST['ekstra_yemek_fiyati'])) {
                 $extra_food_name = htmlspecialchars(trim($_POST['ekstra_yemek_adi']));
                 $extra_food_cost = htmlspecialchars(trim($_POST['ekstra_yemek_fiyati']));
@@ -234,7 +234,7 @@ if (isset($_SESSION['email'])) { ?>
         <?php
             }
         }
-        $restorant_id = $_SESSION['id'];
+        $restorant_id = $_SESSION['restorant_id'];
         $query = $conn->prepare("SELECT * FROM restorant_menu WHERE restorant_id=:restorant_id");
         $query->execute(array(":restorant_id" => $restorant_id));
         ?>
