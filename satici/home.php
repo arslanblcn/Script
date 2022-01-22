@@ -3,6 +3,18 @@ session_start();
 include "restorant_header.php";
 require_once "../config.php";
 if (isset($_SESSION['username'])) {
+  if(isset($_GET['sendFood'])){
+    $order_id = htmlspecialchars(trim($_GET['sendFood']));
+    $status = "Teslim Edildi";
+    $send_qs = $conn->prepare("UPDATE orders SET stat=:stat WHERE id=:order_id");
+    $send_qs->bindParam(":stat", $status);
+    $send_qs->bindParam(":order_id", $order_id);
+    $send_qs->execute();
+    if($send_qs->rowCount() > 0){
+      echo '<script>Swal.fire("Yola Çıktı", "Sipariş Yola Çıktı", "success"); </script>';
+      header("Refresh: 3; url=" . $_SERVER['HTTP_REFERER']);
+    }
+  }
 ?>
   <main>
     <div class="container mt-4">
@@ -77,7 +89,7 @@ if (isset($_SESSION['username'])) {
                   $f_number = unserialize($number_of_food);
                   ?>
                   <?php
-                  echo '<span><i class="fas fa-cookie-bite"></i></span>';
+                  echo '<a href="?sendFood='. $id .'"><span><i class="fas fa-paper-plane"></i></span></a>';
                   $i = 0;
                   foreach($f_name as $f){
                   ?>
