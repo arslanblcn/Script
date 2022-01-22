@@ -11,7 +11,7 @@ if (isset($_SESSION['username'])) {
     $send_qs->bindParam(":order_id", $order_id);
     $send_qs->execute();
     if($send_qs->rowCount() > 0){
-      echo '<script>Swal.fire("Yola Çıktı", "Sipariş Yola Çıktı", "success"); </script>';
+      echo '<script>Swal.fire("Yola Çıktı", "Müşteri siparişi ulaştırılmak üzere yola çıktı", "success"); </script>';
       header("Refresh: 3; url=" . $_SERVER['HTTP_REFERER']);
     }
   }
@@ -108,8 +108,18 @@ if (isset($_SESSION['username'])) {
               <?php 
                 
               }
+            } else {
+              ?>
+              <div class="card-header card__header text-white">
+                  Gelen Siparişler <span class="badge badge-light">0</span>
+              </div>
+              <div class="card-body">
+                Henüz Siparişiniz Bulunmamaktadır.
+              </div>
+              <?php
             }
           ?>
+
           </div>
         </div>
         <div class="col-md-8 mt-3">

@@ -1,4 +1,5 @@
   <?php
+    session_start();
     require_once "../config.php";
     include "restorant_header.php";
     $tur = "";
