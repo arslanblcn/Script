@@ -6,6 +6,12 @@ if (isset($_SESSION['username'])) {
     if(isset($_GET['clear'])){
         unset($_SESSION['item']);
         echo '<script>Swal.fire("Başarılı", "Sepetiniz şimdi boş.", "success"); </script>';
+        header("Refresh: 3; url=" . $_SERVER['HTTP_REFERER']);
+    }
+    if(isset($_GET['order'])){
+        unset($_SESSION['item']);
+        echo '<script>Swal.fire("Başarılı", "Siparişiniz başarıyla alınmıştır", "success"); </script>';
+        header("Refresh: 3; url=" . $_SERVER['HTTP_REFERER']);
     }
 ?>
     <main>
@@ -63,31 +69,43 @@ if (isset($_SESSION['username'])) {
                         <div class="card-header card__header text-white">
                             <div class="d-flex justify-content-between">
                                 <h5>Sepetim</h5>
-                                <a href="<?= $_SERVER['HTTP_REFERER'] ?>&clear" class="btn btn-sm btn-danger"><span><i class="fas fa-trash-alt"></i></span></a>
+                                <a href="<?= $_SERVER['REQUEST_URI']; ?>&clear" class="btn btn-sm btn-danger"><span><i class="fas fa-trash-alt"></i></span></a>
                             </div>
                         </div>
                         <div class="card-body d-flex align-items-center">
-                            <form action="">
+                            <form action="order.php" method="POST">
                                 <?php
                                 if(!empty($_SESSION['error'])){
                                     echo '<script>Swal.fire("Dikkat", "'. $_SESSION['error'] . '", "warning"); </script>';
                                     unset($_SESSION['error']);
                                 }
                                 if (isset($_SESSION['item'])) {
+                                    $temp = 0;
+                                    $restorant_name = htmlspecialchars(trim($_GET['restorant']));
+                                    ?>  
+                                        <div class="text-warning">
+                                            <input type="text" name="restorant_name" value="<?php echo $restorant_name; ?>" class="form-control mb-3" readonly>
+                                        </div>
+                                    <?php
                                     foreach ($_SESSION['item'] as $item) {
                                         if (isset($item['number_of_food']) && $item['number_of_food'] != 0) {
+                                            $temp += $item['food_cost'];
                                 ?>
-                                        <div class="d-flex justify-content-start mb-3">
-                                            <input type="text" class="border-0 color-main" style="width: 12rem;" name="food_cost" value="<?php echo $item['food_name']; ?>" readonly>
-                                            <input type="number" id="number_of_food" name="number_of_food" min="1" max="100" value="<?php echo $item['number_of_food']; ?>">
-                                            <p class="card-text mx-3 py-1 color-main"><span><?php echo number_format($item['food_cost'], 2); ?><i class="fas fa-lira-sign"></i></span></p>
-                                            <span><i class="fas fa-times-circle"></i></span>
+                                        <div class="d-flex justify-content-between mb-3 mr-3">
+                                            <input type="text" class="border-0 color-main" style="width: 18rem;" name="food_name[]" value="<?php echo $item['food_name']; ?>" readonly>
+                                            <input type="number" id="number_of_food" name="number_of_food[]" min="1" max="100" value="<?php echo $item['number_of_food']; ?>">
+                                            <span class="color-main mt-1"><?php echo number_format($item['food_cost'], 2); ?><i class="fas fa-lira-sign"></i></span>
+                                            <input type="hidden" name="total_cost" value="<?php echo $temp; ?>">
                                         </div>
                                     <?php
                                         }
                                     }
-                                } else { ?>
-
+                                    echo '<hr>';?>
+                                    <div class="d-flex justify-content-between">
+                                        <button type="submit" name="giveOrder" class="btn btn-block btn-success">Siparişi Tamamla</button>
+                                        <h5 class="color-main">Toplam : <?php echo number_format($temp, 2); ?><span><i class="fas fa-lira-sign"></i></span></h5>
+                                    </div>
+                                <?php } else { ?>
                                     <i class="fas fa-shopping-basket"></i>
                                     <p class="card-text mx-3">Sepetiniz henüz boş.</p>
                                 <?php

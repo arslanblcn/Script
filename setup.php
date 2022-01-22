@@ -44,11 +44,13 @@
     }
     function orderDetail($conn){
         $sql = "CREATE TABLE orders (id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            order_date DATETIME NOT NULL,
-            total_cost INT(5) NOT NULL,
-            food_cost VARCHAR(5) NOT NULL,
+            order_date DATE NOT NULL,
+            total_cost FLOAT(5) NOT NULL,
+            food_name VARCHAR(255) NOT NULL,
+            number_of_food VARCHAR(255) NOT NULL,
             person_id INT(5) NOT NULL,
-            restorant_menuid INT(4) NOT NULL)";
+            restorant_name VARCHAR(60) NOT NULL,
+            stat VARCHAR(20) NOT NULL)";
         if($conn -> query($sql) === TRUE){echo "[+] Order table has been created";}
         else{echo "[-] Error when creating table " . $conn->error;}
     }
