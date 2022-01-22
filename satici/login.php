@@ -19,6 +19,7 @@
           $_SESSION['username'] = $row['email'];
           $_SESSION['ad'] = $row['owner_firstname'];
           $_SESSION['soyad'] = $row['owner_lastname'];
+          $_SESSION['restorant_name'] = $row['restorant_name'];
           $_SESSION['restorant_id'] = $row['id'];
           header("Location: home.php");
         } else {

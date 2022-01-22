@@ -49,15 +49,55 @@ if (isset($_SESSION['username'])) {
               </div>
             </div>
           </div>
-
           <div class="card mt-3">
-            <div class="card-header card__header text-white">
-              Yemek Sepetim
-            </div>
-            <div class="card-body d-flex align-items-center">
-              <i class="fas fa-shopping-basket"></i>
-              <p class="card-text mx-3">Sepetiniz henüz boş.</p>
-            </div>
+          <?php 
+            $qs = $conn->prepare("SELECT * FROM orders WHERE restorant_name=:restorant_name AND stat='Sipariş Alındı'");
+            $qs->bindParam(':restorant_name', $_SESSION['restorant_name']);
+            $qs->execute();
+            if($qs->rowCount() > 0){
+              $n = $qs->rowCount();?>
+              <div class="card-header card__header text-white">
+                Gelen Siparişler <span class="badge badge-light"><?php echo $n; ?></span>
+              </div>              
+              <?php
+              while($orders = $qs->fetch(PDO::FETCH_ASSOC)){ extract($orders);?>
+              <div class="card-body">
+                <?php 
+                  $user_qs = $conn->prepare("SELECT firstname, lastname, city, district FROM users WHERE id=:id");
+                  $user_qs->bindParam(":id", $person_id);
+                  $user_qs->execute();
+                  if($user_qs->rowCount() > 0){
+                    $row = $user_qs->fetch();
+                    $firstname = $row['firstname'];
+                    $lastname = $row['lastname'];
+                    $city = $row['city'];
+                    $district = $row['district'];
+                  }
+                  $f_name = unserialize($food_name);
+                  $f_number = unserialize($number_of_food);
+                  ?>
+                  <?php
+                  echo '<span><i class="fas fa-cookie-bite"></i></span>';
+                  $i = 0;
+                  foreach($f_name as $f){
+                  ?>
+                    <div class="d-flex ">
+                      <h6 class="color-main mx-1"><?php echo $f . "\t" . $f_number[$i]; ?></h6>
+                    </div>
+                    <?php
+                    $i++;
+                  }
+                   echo '<h6 class="color-main mx-1">Toplam : '. $total_cost . '<span><i class="fas fa-lira-sign"></i></span></h6>';
+              ?>
+              <div class="row">
+                <h6><?php echo "Adres : " . ucwords($firstname) . "\t" . strtoupper($lastname) . "(" . $city . "," . $district . ")" . "<br />"; ?></h6>
+              </div>
+              </div>
+              <?php 
+                
+              }
+            }
+          ?>
           </div>
         </div>
         <div class="col-md-8 mt-3">
@@ -163,20 +203,20 @@ if (isset($_SESSION['username'])) {
                   <?php
                   if ($stmt->rowCount() > 0) {
                     while ($res = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
-                      
-                        <div class="d-flex mx-auto">
-                          <h5 class="flex-grow-1 p-2"><?php echo $res['food']; ?></h5>
-                          <form method="POST" action="food_update.php">
-                            <button type="submit" name="update" class="btn btn-labeled btn-info" value="<?php echo $res['id']; ?>">
-                              <span class="btn-label"><i class="fas fa-pen"></i></span></button>
-                          </form>
-                          <form method="POST" action="<?= $_SERVER['PHP_SELF']; ?>">
-                            <button type="submit" name="delete" class="btn btn-labeled btn-danger" value="<?php echo $res['id']; ?>">
-                              <span class=" btn-label"><i class="fas fa-trash"></i></span></button>
-                          </form>
-                        </div>
-                        <hr>
-                      
+
+                      <div class="d-flex mx-auto">
+                        <h5 class="flex-grow-1 p-2"><?php echo $res['food']; ?></h5>
+                        <form method="POST" action="food_update.php">
+                          <button type="submit" name="update" class="btn btn-labeled btn-info" value="<?php echo $res['id']; ?>">
+                            <span class="btn-label"><i class="fas fa-pen"></i></span></button>
+                        </form>
+                        <form method="POST" action="<?= $_SERVER['PHP_SELF']; ?>">
+                          <button type="submit" name="delete" class="btn btn-labeled btn-danger" value="<?php echo $res['id']; ?>">
+                            <span class=" btn-label"><i class="fas fa-trash"></i></span></button>
+                        </form>
+                      </div>
+                      <hr>
+
                   <?php
                     }
                   }

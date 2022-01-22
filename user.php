@@ -17,7 +17,7 @@
                     <i class="far fa-user p-3"></i>
                   </div>
                   <div class="mx-3">
-                    <h6 class="color-main"><?php echo $_SESSION['ad'] . " " . $_SESSION['soyad']; ?></h6>
+                    <h6 class="color-main text-capitalize"><?php echo $_SESSION['ad'] . " " . $_SESSION['soyad']; ?></h6>
                     <span>17,622 Toplam Puan</span>
                   </div>
                 </div>

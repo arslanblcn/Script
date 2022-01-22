@@ -220,7 +220,7 @@ if (isset($_SESSION['username'])) {
                                             <form action="insertCart.php" method="POST">
                                                 <div class="d-flex mx-auto">
                                                     <button type="submit" name="addCart" class="btn btn-sm btn-success btn-block p-3 m-1"><i class="fas fa-plus-square fa-lg"></i></button>
-                                                    <input type="number" id="number_of_food" name="number_of_food" min="1" max="100">
+                                                    <input type="number" id="number_of_food" name="number_of_food" value="1" min="1" max="100">
                                                     <h5 class="flex-grow-1 p-2"><?php echo $res['food']; ?></h5>
                                                     <input type="hidden" name="food_name" value="<?php echo $res['food']; ?>">
                                                     <input type="text" class="border-0 color-main" name="food_cost" value="<?php echo $res['food_cost']; ?>" readonly>
