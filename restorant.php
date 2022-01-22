@@ -62,17 +62,19 @@ if (isset($_SESSION['username'])) {
                         <div class="card-body d-flex align-items-center">
                             <form action="">
                                 <?php
+                                if(!empty($_SESSION['error'])){
+                                    echo '<script>Swal.fire("Dikkat", "'. $_SESSION['error'] . '", "warning"); </script>';
+                                    unset($_SESSION['error']);
+                                }
                                 if (isset($_SESSION['item'])) {
                                     foreach ($_SESSION['item'] as $item) {
-                                        if(!empty($item['error'])){
-                                            echo '<script>Swal.fire("Dikkat", "'. $item['error'] . '", "warning"); </script>';
-                                        }
                                         if (isset($item['number_of_food']) && $item['number_of_food'] != 0) {
                                 ?>
                                         <div class="d-flex justify-content-start mb-3">
                                             <input type="text" class="border-0 color-main" name="food_cost" value="<?php echo $item['food_name']; ?>" readonly>
                                             <input type="number" id="number_of_food" name="number_of_food" min="1" max="100" value="<?php echo $item['number_of_food']; ?>">
-                                            <p class="card-text mx-3 color-main"><?php echo number_format($item['food_cost'], 2); ?></p>
+                                            <p class="card-text mx-3 color-main"><span><?php echo number_format($item['food_cost'], 2); ?><i class="fas fa-lira-sign"></i></span></p>
+                                            <button class="btn btn-sm"><i class="fas fa-times-circle"></i></button>
                                         </div>
                                     <?php
                                         }

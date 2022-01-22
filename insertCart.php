@@ -18,8 +18,9 @@ if (isset($_POST['addCart'])) {
 
         }
         if($item_exist){
-            $msg = array('error' => "Yemek sepetinizde ekli. Güncellemek için sepeti kullanın.");
-            $_SESSION['item'][] = $msg;
+            $msg = "Yemek sepetinizde ekli. Güncellemek için sepeti kullanın.";
+            $_SESSION['error'] = $msg;
+            $_SESSION['item'][] = $item;
             header("Location: " . $_SERVER['HTTP_REFERER']);
         } else {
             $item = array('food_name' => $food_name, 'number_of_food' => $number_of_food, 'food_cost' => $total_cost);
@@ -31,18 +32,4 @@ if (isset($_POST['addCart'])) {
         $_SESSION['item'][] = $item;
         header("Location: " . $_SERVER['HTTP_REFERER']);
     }
-    /*foreach($_SESSION['item'] as $s){
-        if($s['food_name'] === $food_name){
-            $msg = "Yemek sepetinizde ekli. Güncellemek için sepeti kullanın.";
-            $s['err'] = $msg;
-            echo $msg;
-            //header("Location: " . $_SERVER['HTTP_REFERER']);
-        } else {
-            $item = array('food_name' => $food_name, 'number_of_food' => $number_of_food, 'food_cost' => $total_cost);
-            $_SESSION['item'][] = $item;
-            //header("Location: " . $_SERVER['HTTP_REFERER']);
-        }
-    }*/
-    //echo $total_cost;
-    //header("Location: " . $_SERVER['HTTP_REFERER']);
 }
