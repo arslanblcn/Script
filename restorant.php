@@ -3,6 +3,10 @@ session_start();
 require_once "config.php";
 include "header.php";
 if (isset($_SESSION['username'])) {
+    if(isset($_GET['clear'])){
+        unset($_SESSION['item']);
+        echo '<script>Swal.fire("Başarılı", "Sepetiniz şimdi boş.", "success"); </script>';
+    }
 ?>
     <main>
         <div class="container mt-4">
@@ -57,7 +61,10 @@ if (isset($_SESSION['username'])) {
 
                     <div class="card mt-3">
                         <div class="card-header card__header text-white">
-                            Yemek Sepetim
+                            <div class="d-flex justify-content-between">
+                                <h5>Sepetim</h5>
+                                <a href="<?= $_SERVER['HTTP_REFERER'] ?>&clear" class="btn btn-sm btn-danger"><span><i class="fas fa-trash-alt"></i></span></a>
+                            </div>
                         </div>
                         <div class="card-body d-flex align-items-center">
                             <form action="">
@@ -71,10 +78,10 @@ if (isset($_SESSION['username'])) {
                                         if (isset($item['number_of_food']) && $item['number_of_food'] != 0) {
                                 ?>
                                         <div class="d-flex justify-content-start mb-3">
-                                            <input type="text" class="border-0 color-main" name="food_cost" value="<?php echo $item['food_name']; ?>" readonly>
+                                            <input type="text" class="border-0 color-main" style="width: 12rem;" name="food_cost" value="<?php echo $item['food_name']; ?>" readonly>
                                             <input type="number" id="number_of_food" name="number_of_food" min="1" max="100" value="<?php echo $item['number_of_food']; ?>">
-                                            <p class="card-text mx-3 color-main"><span><?php echo number_format($item['food_cost'], 2); ?><i class="fas fa-lira-sign"></i></span></p>
-                                            <button class="btn btn-sm"><i class="fas fa-times-circle"></i></button>
+                                            <p class="card-text mx-3 py-1 color-main"><span><?php echo number_format($item['food_cost'], 2); ?><i class="fas fa-lira-sign"></i></span></p>
+                                            <span><i class="fas fa-times-circle"></i></span>
                                         </div>
                                     <?php
                                         }
