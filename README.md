@@ -3,7 +3,7 @@ PHP based web application which is like Yemeksepeti
 
 ## Dependencies
 
-If you are linux or mac user, you need to install LAMP Server. (Check [DigitialOcean Installation](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04) it)
+If you are linux or mac user, you need to install LAMP Server. (Check [DigitialOcean Installation](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04) out)
 
 If you're using Windows, you need install a web server such as XAMPP, WAMP or AppServ.
 
