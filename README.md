@@ -23,3 +23,13 @@ To run this app in local: First, install the repository via `git clone`. Move pr
 git clone https://github.com/arslanblcn/Script.git
 ```
 and run `setup.php` to create application's tables. (You can visit the page on browser by navigating the localhost)
+
+## Topics Covered
+
+- PHP CRUD System
+- Authentication
+- Session Based Bucket
+
+## XSS & SQLi Protection
+
+To prevent from the most used attacks, we used functions that are already in PHP such as `htmlspeacialchars(), trim()` etc. Also, by using PDO, prevention could be success against SQLi attacks.
