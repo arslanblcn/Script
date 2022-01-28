@@ -1,7 +1,7 @@
 # Script
 PHP based web application which is like Yemeksepeti
 
-## Dependencies
+## Installation
 
 If you are linux or mac user, you need to install LAMP Server. (Check [DigitialOcean Installation](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04) out)
 
@@ -14,8 +14,6 @@ GRANT ALL PRIVILEGES ON * . * TO 'admin'@'localhost';
 FLUSH PRIVILEGES;
 ```
 Database is created.
-
-## Installation
 
 To run this app in local: First, install the repository via `git clone`. Move project to the web server directory.
 
