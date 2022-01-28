@@ -5,6 +5,8 @@ PHP based web application which is like Yemeksepeti
 
 If you are linux or mac user, you need to install LAMP Server. (Check [DigitialOcean Installation](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04) it)
 
+If you're using Windows, you need install a web server such as XAMPP, WAMP or AppServ.
+
 After installation of LAMP, create database as defined in the `config.php`. Log in your mysql shell. Then follow the processes
 ```bash
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'password';
